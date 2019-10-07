@@ -3,6 +3,7 @@
     <v-col>
 
       <p>Bye</p>
+
       <li v-for="(message, index) in messageList" :item="message" :key="index">
         {{ message }}
       </li>
@@ -114,8 +115,15 @@
 </template>
 
 <script>
+import Popup from './Popup'
+
 export default {
   name: 'Calendar',
+
+  components: {
+    Popup
+  },
+
   props: {
     event: {
       title: '',

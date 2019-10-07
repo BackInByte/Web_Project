@@ -5,6 +5,7 @@ import Login from '@/components/Login'
 import About from '@/views/About'
 import Dashboard from '@/components/DashBoard'
 import Calendar from '@/components/Calendar'
+import Home from '@/views/Home'
 
 Vue.use(Router)
 
@@ -39,6 +40,11 @@ export default new Router({
       path: '/calendar',
       name: 'Calendar',
       component: Calendar
+    },
+    {
+      path: '/home',
+      name: 'Home',
+      component: Home
     }
   ]
 })

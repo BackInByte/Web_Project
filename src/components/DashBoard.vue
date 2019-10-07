@@ -3,7 +3,7 @@
         <h2>Dashboard</h2>
         <p>Name: {{ user.name }}</p>
         <p>Name: {{ user.email }}</p>
-        <router-link :to="{ name: 'Calendar'}">Calendar</router-link>
+        <router-link :to="{ name: 'Home'}">Home</router-link>
     </div>
 </template>
 <script>
