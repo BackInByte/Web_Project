@@ -21,7 +21,7 @@ app.use(passport.initialize())
 
 app.use(passport.session())
 
-const publicRoot = 'C:/Users/Sébastien/Desktop/4A/Web/td1/premier-app/dist'
+const publicRoot = 'dist'
 
 app.use(express.static(publicRoot))
 
