@@ -16,24 +16,37 @@
     </v-app-bar>
 
     <v-content>
+      <Toolbar></Toolbar>
       <router-view></router-view>
-      <Popup @newEvent1="updateEvent1"/>
-      <Calendar :event='evt'/>
-      
-      <p>Bonjour</p>
+      <!--<Popup @newEvent1="updateEvent1"/>
+      <Calendar :event='evt'/>-->
+
+      <!--<p>Bonjour</p>-->
     </v-content>
+    <div id="app">
+        <img src="./assets/logo.png">
+        <div>
+            <router-link :to="{ name: 'Dashboard'}">Dashboard</router-link>
+            <router-link :to="{ name: 'Login'}">Login</router-link>
+            <a href="/" v-on:click="logout">Logout</a>
+        </div>
+    </div>
   </v-app>
 </template>
 
 <script>
-import Popup from './components/Popup'
-import Calendar from './components/Calendar'
+// import Popup from './components/Popup'
+// import Calendar from './components/Calendar'
+import router from './router'
+import axios from 'axios'
+import Toolbar from './components/Toolbar'
 
 export default {
   name: 'App',
   components: {
-    Popup,
-    Calendar
+    /* Popup,
+    Calendar */
+    Toolbar
   },
   data: function () {
     return {
@@ -48,6 +61,13 @@ export default {
     updateEvent1 (evt) {
       this.evt = evt
       console.log(this.evt.title, this.evt.description, this.evt.event_date)
+    },
+    logout: function (e) {
+      axios
+        .get('/api/logout')
+        .then(() => {
+          router.push('/')
+        })
     }
 
     /*

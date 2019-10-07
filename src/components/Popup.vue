@@ -30,11 +30,10 @@
             <v-date-picker v-model="event_date" color="light blue"></v-date-picker>
 
           </v-menu>
-          
+
           <v-btn class="success" @click="submit">
             Save
           </v-btn>
-
 
         </v-card-text>
 
