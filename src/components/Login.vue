@@ -31,6 +31,7 @@ export default {
           })
           .catch((errors) => {
             console.log('Cannot login')
+            alert('Mauvais identifiant')
           })
       }
       login()
