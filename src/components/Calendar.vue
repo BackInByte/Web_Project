@@ -3,7 +3,7 @@
     <v-col>
 
       <p>Bye</p>
-
+      <p>Login : {{ user.login }}</p>
       <li v-for="(message, index) in messageList" :item="message" :key="index">
         {{ message }}
       </li>
@@ -116,6 +116,7 @@
 
 <script>
 import Popup from './Popup'
+// import Home from '@/views/Home'
 
 export default {
   name: 'Calendar',
@@ -129,6 +130,9 @@ export default {
       title: '',
       description: '',
       event_date: ''
+    },
+    user: {
+      login: ''
     }
   },
 
@@ -313,6 +317,7 @@ export default {
   },
   mounted () {
     this.$refs.calendar.checkChange()
+    console.log(this.user.login)
   },
   methods: {
     viewDay ({ date }) {
