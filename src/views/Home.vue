@@ -5,6 +5,9 @@
       <p>Name: {{ user.login }}</p>
       <Popup @newEvent1="updateEvent1"/>
       <Calendar :event='evt' :user='user'/>
+      <p>Calendrier pour test :</p>
+      <Events ref='RefEvents'></Events>
+      Events.select_event_table(2)
     </v-flex>
   </div>
 </template>
@@ -15,13 +18,15 @@
 import axios from 'axios'
 import Popup from '../components/Popup'
 import Calendar from '../components/Calendar'
+import Events from '../components/Events'
 
 export default {
   name: 'Home',
   components: {
     // HelloWorld,
     Popup,
-    Calendar
+    Calendar,
+    Events
   },
   data () {
     return {
@@ -46,16 +51,25 @@ export default {
         .then((response) => {
           console.log(response)
           self.$set(this.user, 'login', response.data.user.email)
+          console.log(this.user.login)
+          this.load_Events_table(String(this.user.login))
         })
         .catch((errors) => {
           console.log(errors)
           // router.push('/')
         })
+    },
+    load_Events_table: function (parameter) {
+      console.log('Appel fonction de Events')
+      console.log('parameter' + parameter)
+      this.$root.$emit('Events', parameter)
     }
   },
   mounted () {
+    console.log('mounted de Home')
     this.loginUser()
     console.log(this.user.login)
+    console.log(String(this.user.login))
   }
 
 }
