@@ -62,7 +62,7 @@ export default {
     load_Events_table: function (parameter) {
       console.log('Appel fonction de Events')
       console.log('parameter' + parameter)
-      this.$root.$emit('Events', parameter)
+      this.$root.$emit('Calendar', parameter)
     }
   },
   mounted () {

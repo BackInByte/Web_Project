@@ -54,10 +54,11 @@
           ref="calendar"
           v-model="focus"
           color="primary"
-          :events="events"
+          :events="user_events"
           :event-color="getEventColor"
           :event-margin-bottom="3"
-          :now="today"
+          now="2019-01-08"
+          value="2019-01-08"
           :type="type"
           @click:event="showEvent"
           @click:more="viewDay"
@@ -136,8 +137,7 @@ export default {
     }
   },
 
-  data:
-  () => ({
+  data: () => ({
     today: '2019-01-01',
     focus: '2019-01-01',
     type: 'month',
@@ -152,113 +152,8 @@ export default {
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
-    events: [
-      {
-        name: 'Vacation',
-        details: 'Going to the beach!',
-        start: '2018-12-29',
-        end: '2019-01-01',
-        color: 'blue'
-      },
-      {
-        name: 'Meeting',
-        details: 'Spending time on how we do not have enough time',
-        start: '2019-01-07 09:00',
-        end: '2019-01-07 09:30',
-        color: 'indigo'
-      },
-      {
-        name: 'Large Event',
-        details: 'This starts in the middle of an event and spans over multiple events',
-        start: '2018-12-31',
-        end: '2019-01-04',
-        color: 'deep-purple'
-      },
-      {
-        name: '3rd to 7th',
-        details: 'Testing',
-        start: '2019-01-03',
-        end: '2019-01-07',
-        color: 'cyan'
-      },
-      {
-        name: 'Big Meeting',
-        details: 'A very important meeting about nothing',
-        start: '2019-01-07 08:00',
-        end: '2019-01-07 11:30',
-        color: 'red'
-      },
-      {
-        name: 'Another Meeting',
-        details: 'Another important meeting about nothing',
-        start: '2019-01-07 10:00',
-        end: '2019-01-07 13:30',
-        color: 'brown'
-      },
-      {
-        name: '7th to 8th',
-        start: '2019-01-07',
-        end: '2019-01-08',
-        color: 'blue'
-      },
-      {
-        name: 'Lunch',
-        details: 'Time to feed',
-        start: '2019-01-07 12:00',
-        end: '2019-01-07 15:00',
-        color: 'deep-orange'
-      },
-      {
-        name: '30th Birthday',
-        details: 'Celebrate responsibly',
-        start: '2019-01-03',
-        color: 'teal'
-      },
-      {
-        name: 'New Year',
-        details: 'Eat chocolate until you pass out',
-        start: '2019-01-01',
-        end: '2019-01-02',
-        color: 'green'
-      },
-      {
-        name: 'Conference',
-        details: 'The best time of my life',
-        start: '2019-01-21',
-        end: '2019-01-28',
-        color: 'grey darken-1'
-      },
-      {
-        name: 'Hackathon',
-        details: 'Code like there is no tommorrow',
-        start: '2019-01-30 23:00',
-        end: '2019-02-01 08:00',
-        color: 'black'
-      },
-      {
-        name: 'event 1',
-        start: '2019-01-14 18:00',
-        end: '2019-01-14 19:00',
-        color: '#4285F4'
-      },
-      {
-        name: 'event 2',
-        start: '2019-01-14 18:00',
-        end: '2019-01-14 19:00',
-        color: '#4285F4'
-      },
-      {
-        name: 'event 5',
-        start: '2019-01-14 18:00',
-        end: '2019-01-14 19:00',
-        color: '#4285F4'
-      },
-      {
-        name: 'event 3',
-        start: '2019-01-14 18:30',
-        end: '2019-01-14 20:30',
-        color: '#4285F4'
-      },
+    user_events: [{}],
+    user1_events: [
       {
         name: 'event 4',
         start: '2019-01-14 19:00',
@@ -275,6 +170,24 @@ export default {
         name: 'event 7',
         start: '2019-01-14 22:00',
         end: '2019-01-14 23:00',
+        color: '#4285F4'
+      }
+    ],
+    user2_events: [
+      {
+        name: 'New Year',
+        start: '2019-01-01',
+        color: '#4285F4'
+      },
+      {
+        name: 'Conference',
+        start: '2019-01-21',
+        color: '#4285F4'
+      },
+      {
+        name: 'Hackathon',
+        start: '2019-01-30',
+        end: '2019-02-01',
         color: '#4285F4'
       }
     ],
@@ -315,11 +228,34 @@ export default {
       })
     }
   },
-  mounted () {
-    this.$refs.calendar.checkChange()
-    console.log(this.user.login)
-  },
   methods: {
+    select_event_table (parameter) {
+      if (parameter === "user@email.com") {
+        this.user_events = this.user2_events
+        this.$refs.calendar.now = "2019-01-10"
+        // this.forceUpdate()
+        console.log(this.$refs.calendar.now)
+        console.log(this.$refs.calendar)
+        console.log(this.$refs.calendar.events)
+        console.log(this.$refs.calendar)
+        console.log(this.$refs.calendar.events)
+        // this.$refs.calendar.checkChange()
+        // this.updateRange()
+        console.log('parameter' + parameter)
+        console.log(this.$refs)
+      } else {
+        this.user_events = this.user1_events
+        this.$refs.calendar.now = "2019-01-12"
+        // .forceUpdate()
+        console.log(this.$refs.calendar.now)
+        console.log(this.$refs.calendar.events)
+        console.log(this.$refs.calendar)
+        // this.$refs.calendar.checkChange()
+        // this.updateRange()
+        console.log('parameter' + parameter)
+        console.log(this.$refs)
+      }
+    },
     viewDay ({ date }) {
       this.focus = date
       this.type = 'day'
@@ -363,13 +299,23 @@ export default {
         : ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'][d % 10]
     },
     deleteEvent () {
-      var index = this.events.indexOf(this.selectedEvent)
-      this.events.splice(index, 1)
+      var index = this.user_events.indexOf(this.selectedEvent)
+      this.user_events.splice(index, 1)
     }
   },
+
+  mounted () {
+    this.$refs.calendar.checkChange()
+    console.log(this.user.login)
+    this.$root.$on('Calendar', (parameter) => {
+      console.log('mounted de Calendar')
+      this.select_event_table(parameter)
+    })
+  },
+
   watch: {
     event: function () {
-      this.events.push({
+      this.user_events.push({
         name: this.event.title,
         start: this.event.event_date,
         color: '#4285F4'
