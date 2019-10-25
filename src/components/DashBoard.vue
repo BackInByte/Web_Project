@@ -7,7 +7,7 @@
 </template>
 <script>
 import axios from 'axios'
-// import router from '../router'
+import router from '../router'
 export default {
   name: 'Login',
   data () {
@@ -29,7 +29,7 @@ export default {
         })
         .catch((errors) => {
           console.log(errors)
-          // router.push('/')
+          router.push('/')
         })
     }
   },

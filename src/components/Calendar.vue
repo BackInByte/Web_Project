@@ -71,6 +71,9 @@
           :activator="selectedElement"
           full-width
           offset-x
+          @loadstart="saveEvent"
+          @change="saveEvent"
+          @click.native="greet"
         >
           <v-card
             color="grey lighten-4"
@@ -81,19 +84,17 @@
               :color="selectedEvent.color"
               dark
             >
-              <v-btn icon>
-                <v-icon>mdi-pencil</v-icon>
-              </v-btn>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <div class="flex-grow-1"></div>
+              <v-btn id="greet" icon @click="saveEvent" v-on="on">
+                <v-icon>mdi-dots-vertical</v-icon>
+              </v-btn>
+              <PopupUpdate id="popupupdate" style="display:none" @newEvent2="updateEvent2"/>
               <v-btn @click="deleteEvent" icon>
                 <v-icon>mdi-delete</v-icon>
               </v-btn>
-              <v-btn icon>
+              <v-btn @click="saveEvent" icon>
                 <v-icon>mdi-heart</v-icon>
-              </v-btn>
-              <v-btn icon>
-                <v-icon>mdi-dots-vertical</v-icon>
               </v-btn>
             </v-toolbar>
             <v-card-text>
@@ -118,17 +119,26 @@
 <script>
 import Popup from './Popup'
 // import Home from '@/views/Home'
+import PopupUpdate from './PopupUpdate'
+export const event =
+  {
+    name: '',
+    description: '',
+    start: '',
+    index: ''
+  }
 
 export default {
   name: 'Calendar',
 
   components: {
-    Popup
+    Popup,
+    PopupUpdate
   },
 
   props: {
     event: {
-      title: '',
+      name: '',
       description: '',
       event_date: ''
     },
@@ -157,19 +167,16 @@ export default {
       {
         name: 'event 4',
         start: '2019-01-14 19:00',
-        end: '2019-01-14 20:00',
         color: '#4285F4'
       },
       {
         name: 'event 6',
         start: '2019-01-14 21:00',
-        end: '2019-01-14 23:00',
         color: '#4285F4'
       },
       {
         name: 'event 7',
         start: '2019-01-14 22:00',
-        end: '2019-01-14 23:00',
         color: '#4285F4'
       }
     ],
@@ -187,7 +194,6 @@ export default {
       {
         name: 'Hackathon',
         start: '2019-01-30',
-        end: '2019-02-01',
         color: '#4285F4'
       }
     ],
@@ -230,9 +236,9 @@ export default {
   },
   methods: {
     select_event_table (parameter) {
-      if (parameter === "user@email.com") {
+      if (parameter === 'user@email.com') {
         this.user_events = this.user2_events
-        this.$refs.calendar.now = "2019-01-10"
+        this.$refs.calendar.now = '2019-01-10'
         // this.forceUpdate()
         console.log(this.$refs.calendar.now)
         console.log(this.$refs.calendar)
@@ -245,7 +251,7 @@ export default {
         console.log(this.$refs)
       } else {
         this.user_events = this.user1_events
-        this.$refs.calendar.now = "2019-01-12"
+        this.$refs.calendar.now = '2019-01-12'
         // .forceUpdate()
         console.log(this.$refs.calendar.now)
         console.log(this.$refs.calendar.events)
@@ -299,8 +305,42 @@ export default {
         : ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'][d % 10]
     },
     deleteEvent () {
+      console.log('deleteEvent' + this.selectedEvent.name + 'name' + this.selectedEvent.name)
       var index = this.user_events.indexOf(this.selectedEvent)
+      console.log('Index : ' + this.user_events.indexOf(this.selectedEvent))
       this.user_events.splice(index, 1)
+    },
+    updateEvent2 (evt) {
+      console.log('Calendar update reçu : ' + evt.name + evt.start)
+      var index = event.index
+      console.log('Event avec index : ' + this.user_events[index].name)
+      if (evt.name) {
+        console.log('if name')
+        this.user_events[index].name = evt.name
+      }
+      if (evt.description) {
+        console.log('if description')
+        this.user_events[index].description = evt.description
+      }
+      if (evt.start) {
+        console.log('if start')
+        this.user_events[index].start = evt.start
+      }
+      console.log('Event avec index après : ' + this.user_events[index].name, this.user_events[index].start)
+      document.getElementById('popupupdate').style.display = 'none'
+      document.getElementById('greet').style.display = 'block'
+    },
+    saveEvent: function () {
+      console.log('Greet')
+      document.getElementById('popupupdate').style.display = 'block'
+      document.getElementById('greet').style.display = 'none'
+      console.log('saveEvent : ' + this.selectedEvent.name, this.selectedEvent.start)
+      event.name = this.selectedEvent.name
+      event.description = this.selectedEvent.description
+      event.start = this.selectedEvent.start
+      console.log('saveEvent sauvegardé : ' + event.name, event.start)
+      event.index = this.user_events.indexOf(this.selectedEvent)
+      console.log('saveEvent index : ' + event.index)
     }
   },
 

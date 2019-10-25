@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-toolbar>
-      <v-toolbar-title>Title</v-toolbar-title>
+      <v-toolbar-title class="headline text-uppercase">Life Manager</v-toolbar-title>
 
       <div class="flex-grow-1"></div>
 
@@ -9,19 +9,11 @@
       </v-toolbar-items>
 
       <template v-if="$vuetify.breakpoint.smAndUp">
-        <router-link :to="{ name: 'Dashboard'}">Dashboard</router-link>
+        <v-btn @click="dashboard">Dashboard</v-btn>
         &nbsp;
-        <a href="/" v-on:click="logout"> Logout</a>
-        <v-btn @click="about" icon>
-          <v-icon>mdi-export-variant</v-icon>
-        </v-btn>
-        <router-link :to="{ name: 'About'}">ABOUT</router-link>
-        <v-btn icon>
-          <v-icon>mdi-delete-circle</v-icon>
-        </v-btn>
-        <v-btn icon>
-          <v-icon>mdi-plus-circle</v-icon>
-        </v-btn>
+        <v-btn @click="logout">Logout</v-btn>
+        &nbsp;
+        <v-btn @click="about">About</v-btn>
       </template>
     </v-toolbar>
   </div>
@@ -33,10 +25,13 @@ import axios from 'axios'
 export default {
   methods: {
     about () {
-      router.push('/About')
+      router.push('/about')
     },
     login () {
       router.push('/')
+    },
+    dashboard () {
+      router.push('/dashboard')
     },
     logout: function (e) {
       axios

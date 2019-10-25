@@ -43,7 +43,7 @@ export default {
   methods: {
     updateEvent1 (evt) {
       this.evt = evt
-      console.log(this.evt.title, this.evt.description, this.evt.event_date)
+      console.log('Home : ' + this.evt.title, this.evt.description, this.evt.event_date)
     },
     loginUser () {
       let self = this
