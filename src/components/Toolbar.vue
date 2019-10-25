@@ -9,6 +9,8 @@
       </v-toolbar-items>
 
       <template v-if="$vuetify.breakpoint.smAndUp">
+        <v-btn @click="calendar">Calendar</v-btn>
+        &nbsp;
         <v-btn @click="dashboard">Dashboard</v-btn>
         &nbsp;
         <v-btn @click="logout">Logout</v-btn>
@@ -29,6 +31,9 @@ export default {
     },
     login () {
       router.push('/')
+    },
+    calendar () {
+      router.push('home')
     },
     dashboard () {
       router.push('/dashboard')

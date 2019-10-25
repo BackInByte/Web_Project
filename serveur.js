@@ -36,7 +36,19 @@ let users = [
     id: 2,
     name: 'Emma',
     email: 'emma@email.com',
-    password: 'password2'
+    password: 'emma02'
+  },
+  {
+    id: 3,
+    name: 'Fnatic',
+    email: 'fnatic@email.com',
+    password: 'thebest'
+  },
+  {
+    id: 4,
+    name: 'Julien',
+    email: 'julien@email.com',
+    password: 'lebro'
   }
 ]
 

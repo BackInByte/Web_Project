@@ -48,7 +48,7 @@ export default {
         axios.post('/api/login', data)
           .then((response) => {
             console.log('Logged in')
-            router.push('/dashboard')// .catch(err => {})
+            router.push('/home')// .catch(err => {})
           })
           .catch((errors) => {
             console.log('Cannot login')

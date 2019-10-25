@@ -1,9 +1,7 @@
 <template>
   <v-row class="fill-height">
     <v-col>
-
-      <p>Bye</p>
-      <p>Login : {{ user.login }}</p>
+      <!--<p>Calendrier de : {{ user.login }}</p>-->
       <li v-for="(message, index) in messageList" :item="message" :key="index">
         {{ message }}
       </li>
@@ -117,7 +115,6 @@
 </template>
 
 <script>
-import Popup from './Popup'
 // import Home from '@/views/Home'
 import PopupUpdate from './PopupUpdate'
 export const event =
@@ -132,7 +129,6 @@ export default {
   name: 'Calendar',
 
   components: {
-    Popup,
     PopupUpdate
   },
 
@@ -143,13 +139,14 @@ export default {
       event_date: ''
     },
     user: {
-      login: ''
+      login: '',
+      name: ''
     }
   },
 
   data: () => ({
-    today: '2019-01-01',
-    focus: '2019-01-01',
+    today: '2019-10-01',
+    focus: '2019-10-01',
     type: 'month',
     typeToLabel: {
       month: 'Month',
@@ -165,36 +162,75 @@ export default {
     user_events: [{}],
     user1_events: [
       {
-        name: 'event 4',
-        start: '2019-01-14 19:00',
-        color: '#4285F4'
+        name: 'Anniversaire Clémence',
+        start: '2019-11-15',
+        color: '#FD6C9E'
       },
       {
-        name: 'event 6',
-        start: '2019-01-14 21:00',
-        color: '#4285F4'
+        name: 'Concert BTS',
+        start: '2019-11-18 21:00',
+        color: '#FD6C9E'
       },
       {
-        name: 'event 7',
-        start: '2019-01-14 22:00',
-        color: '#4285F4'
+        name: 'Shopping avec Irene',
+        start: '2019-11-14',
+        color: '#FD6C9E'
       }
     ],
     user2_events: [
       {
-        name: 'New Year',
-        start: '2019-01-01',
+        name: 'Soirée',
+        start: '2019-11-07',
         color: '#4285F4'
       },
       {
-        name: 'Conference',
-        start: '2019-01-21',
+        name: 'Picnic',
+        start: '2019-11-21',
         color: '#4285F4'
       },
       {
-        name: 'Hackathon',
-        start: '2019-01-30',
+        name: 'Projet Web',
+        start: '2019-10-30',
         color: '#4285F4'
+      }
+    ],
+    user3_events: [
+      {
+        name: 'Worlds',
+        start: '2019-10-12',
+        color: '#ED7F10'
+      },
+      {
+        name: 'Quarts de finale',
+        start: '2019-10-26',
+        color: '#ED7F10'
+      },
+      {
+        name: 'Demi finale',
+        start: '2019-11-02',
+        color: '#ED7F10'
+      },
+      {
+        name: 'Final',
+        start: '2019-11-10',
+        color: '#ED7F10'
+      }
+    ],
+    user4_events: [
+      {
+        name: 'LAN CS:GO',
+        start: '2019-11-09',
+        color: '#00FF00'
+      },
+      {
+        name: 'Salle',
+        start: '2019-11-12',
+        color: '#00FF00'
+      },
+      {
+        name: 'Restau avec les bros',
+        start: '2019-11-18',
+        color: '#00FF00'
       }
     ],
     messageList: []
@@ -249,9 +285,34 @@ export default {
         // this.updateRange()
         console.log('parameter' + parameter)
         console.log(this.$refs)
-      } else {
+      }
+      if (parameter === 'emma@email.com') {
         this.user_events = this.user1_events
         this.$refs.calendar.now = '2019-01-12'
+        // .forceUpdate()
+        console.log(this.$refs.calendar.now)
+        console.log(this.$refs.calendar.events)
+        console.log(this.$refs.calendar)
+        // this.$refs.calendar.checkChange()
+        // this.updateRange()
+        console.log('parameter' + parameter)
+        console.log(this.$refs)
+      }
+      if (parameter === 'fnatic@email.com') {
+        this.user_events = this.user3_events
+        this.$refs.calendar.now = '2019-10-12'
+        // .forceUpdate()
+        console.log(this.$refs.calendar.now)
+        console.log(this.$refs.calendar.events)
+        console.log(this.$refs.calendar)
+        // this.$refs.calendar.checkChange()
+        // this.updateRange()
+        console.log('parameter' + parameter)
+        console.log(this.$refs)
+      }
+      if (parameter === 'julien@email.com') {
+        this.user_events = this.user4_events
+        this.$refs.calendar.now = '2019-11-01'
         // .forceUpdate()
         console.log(this.$refs.calendar.now)
         console.log(this.$refs.calendar.events)
@@ -355,11 +416,14 @@ export default {
 
   watch: {
     event: function () {
-      this.user_events.push({
-        name: this.event.title,
-        start: this.event.event_date,
-        color: '#4285F4'
-      })
+      if (this.event.event_date && this.event.title) {
+        console.log('Event ajouté')
+        this.user_events.push({
+          name: this.event.title,
+          start: this.event.event_date,
+          color: '#4285F4'
+        })
+      }
     }
   }
 }

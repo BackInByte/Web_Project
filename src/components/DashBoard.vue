@@ -1,8 +1,10 @@
 <template>
-    <div>
+    <div align="center">
         <h2>Dashboard</h2>
-        <p>Login: {{ user.login }}</p>
-        <router-link :to="{ name: 'Home'}">Home</router-link>
+        <br>
+        <p>Mail : {{ user.login }}</p>
+        <br>
+        <p>Nom : {{ user.name }}</p>
     </div>
 </template>
 <script>
@@ -13,7 +15,8 @@ export default {
   data () {
     return {
       user: {
-        login: ''
+        login: '',
+        name: ''
       }
     }
   },
@@ -24,6 +27,7 @@ export default {
         .then((response) => {
           console.log(response)
           self.$set(this.user, 'login', response.data.user.email)
+          self.$set(this.user, 'name', response.data.user.name)
           console.log(this.user)
           console.log(this.user.login)
         })

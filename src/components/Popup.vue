@@ -5,7 +5,6 @@
       width="500"
     >
       <template v-slot:activator="{ on }">
-        <p>Hola</p>
         <v-btn v-on="on">
           Add new event
         </v-btn>
