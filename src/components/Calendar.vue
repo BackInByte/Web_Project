@@ -55,7 +55,7 @@
           :events="user_events"
           :event-color="getEventColor"
           :event-margin-bottom="3"
-          now="2019-01-08"
+          :now="today"
           value="2019-01-08"
           :type="type"
           @click:event="showEvent"
@@ -145,7 +145,7 @@ export default {
   },
 
   data: () => ({
-    today: '2019-10-01',
+    today: '',
     focus: '2019-10-01',
     type: 'month',
     typeToLabel: {
@@ -274,7 +274,6 @@ export default {
     select_event_table (parameter) {
       if (parameter === 'user@email.com') {
         this.user_events = this.user2_events
-        this.$refs.calendar.now = '2019-01-10'
         // this.forceUpdate()
         console.log(this.$refs.calendar.now)
         console.log(this.$refs.calendar)
@@ -288,7 +287,6 @@ export default {
       }
       if (parameter === 'emma@email.com') {
         this.user_events = this.user1_events
-        this.$refs.calendar.now = '2019-01-12'
         // .forceUpdate()
         console.log(this.$refs.calendar.now)
         console.log(this.$refs.calendar.events)
@@ -300,7 +298,6 @@ export default {
       }
       if (parameter === 'fnatic@email.com') {
         this.user_events = this.user3_events
-        this.$refs.calendar.now = '2019-10-12'
         // .forceUpdate()
         console.log(this.$refs.calendar.now)
         console.log(this.$refs.calendar.events)
@@ -312,7 +309,6 @@ export default {
       }
       if (parameter === 'julien@email.com') {
         this.user_events = this.user4_events
-        this.$refs.calendar.now = '2019-11-01'
         // .forceUpdate()
         console.log(this.$refs.calendar.now)
         console.log(this.$refs.calendar.events)
@@ -322,6 +318,9 @@ export default {
         console.log('parameter' + parameter)
         console.log(this.$refs)
       }
+    },
+    SetCurrentDate () {
+      this.today = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
     },
     viewDay ({ date }) {
       this.focus = date
@@ -412,6 +411,7 @@ export default {
       console.log('mounted de Calendar')
       this.select_event_table(parameter)
     })
+    this.SetCurrentDate()
   },
 
   watch: {
