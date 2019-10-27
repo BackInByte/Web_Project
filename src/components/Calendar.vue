@@ -1,7 +1,6 @@
 <template>
   <v-row class="fill-height">
     <v-col>
-      <!--<p>Calendrier de : {{ user.login }}</p>-->
       <li v-for="(message, index) in messageList" :item="message" :key="index">
         {{ message }}
       </li>
@@ -115,7 +114,6 @@
 </template>
 
 <script>
-// import Home from '@/views/Home'
 import PopupUpdate from './PopupUpdate'
 export const event =
   {
@@ -294,7 +292,6 @@ export default {
     },
     updateUserEventsTable (parameter) {
       if (parameter === 'user@email.com') {
-        // this.user1_events = []
         this.user1_events = this.user_events
         localStorage.setItem('user1_events', JSON.stringify(this.user1_events))
         console.log(this.user_events)
@@ -373,7 +370,6 @@ export default {
     updateEvent2 (evt) {
       console.log('Calendar update reçu : ' + evt.name + evt.start)
       var index = event.index
-      console.log('Event avec index : ' + this.user_events[index].name)
       if (evt.name) {
         console.log('if name')
         this.user_events[index].name = evt.name
@@ -393,10 +389,8 @@ export default {
       this.selectedOpen = false
     },
     saveEvent: function () {
-      console.log('Greet')
       document.getElementById('popupupdate').style.display = 'block'
       document.getElementById('greet').style.display = 'none'
-      console.log('saveEvent : ' + this.selectedEvent.name, this.selectedEvent.start)
       event.name = this.selectedEvent.name
       event.description = this.selectedEvent.description
       event.start = this.selectedEvent.start
@@ -445,9 +439,6 @@ export default {
         this.updateUserEventsTable(this.user_name)
       }
     }
-    /* user1_events: function () {
-      this.updateUserEventsTable(this.user_name)
-    } */
   }
 }
 </script>

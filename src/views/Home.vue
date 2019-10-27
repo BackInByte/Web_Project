@@ -9,8 +9,7 @@
 </template>
 
 <script>
-// import HelloWorld from '../components/HelloWorld';
-// import router from '@/router'
+import router from '@/router'
 import axios from 'axios'
 import Popup from '../components/Popup'
 import Calendar from '../components/Calendar'
@@ -18,7 +17,6 @@ import Calendar from '../components/Calendar'
 export default {
   name: 'Home',
   components: {
-    // HelloWorld,
     Popup,
     Calendar
   },
@@ -52,7 +50,7 @@ export default {
         })
         .catch((errors) => {
           console.log(errors)
-          // router.push('/')
+          router.push('/')
         })
     },
     load_Events_table: function (parameter) {

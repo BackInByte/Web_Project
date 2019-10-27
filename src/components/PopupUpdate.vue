@@ -13,13 +13,13 @@
 
       <v-card :close-on-content-click="true">
         <v-card-title>
-          Update a new event
+          Mettre à jour un event
         </v-card-title>
 
         <v-card-text>
-          Please fill the following fields :
-          <v-text-field placeholder="enter title" label="Title" v-model="title" @keyup.enter="submit"></v-text-field>
-          <v-text-field placeholder="enter description" label="description" v-model="description" @keyup.enter="submit"></v-text-field>
+          Compléter les cases suivantes :
+          <v-text-field placeholder="entrer un titre" label="Title" v-model="title" @keyup.enter="submit"></v-text-field>
+          <v-text-field placeholder="entrer une description" label="description" v-model="description" @keyup.enter="submit"></v-text-field>
 
           <v-menu>
 
@@ -32,7 +32,7 @@
           </v-menu>
 
           <v-btn class="success" @click="submit">
-            Save
+            Sauvegarder
           </v-btn>
 
         </v-card-text>
@@ -56,16 +56,12 @@ export default {
   methods: {
     submit () {
       console.log('Popup Update : ' + this.title, this.description, this.event_date)
-      // console.log(this.title, this.description, this.event_date)
       // à terme utiliser les données récupérées pour les stocker avec d'autres évènements puis les afficher sous la forme d'un calendrier
       this.$emit('newEvent2', {
         name: this.title,
         description: this.description,
         start: this.event_date
       })
-      //, this.description, this.event_date)
-      // this.$emit('newEvent2', this.description)
-      // this.$emit('newEvent3', this.event_date)
       this.title = ''
       this.description = ''
       this.event_date = ''

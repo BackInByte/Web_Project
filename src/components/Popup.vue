@@ -6,21 +6,21 @@
     >
       <template v-slot:activator="{ on }">
         <v-btn v-on="on">
-          Add new event
+          Ajouter un événement
         </v-btn>
       </template>
 
       <v-card>
         <v-card-title>
-          Add a new event
+          Ajouter un événement
         </v-card-title>
 
         <v-card-text>
           <v-form ref="Popup">
 
             Please fill the following fields :
-            <v-text-field placeholder="enter title" label="Title" v-model="title" :rules="inputRules" @keyup.enter="submit"></v-text-field>
-            <v-text-field placeholder="enter description" label="description" v-model="description" :rules="inputRules" @keyup.enter="submit"></v-text-field>
+            <v-text-field placeholder="entrer un titre" label="Title" v-model="title" :rules="inputRules" @keyup.enter="submit"></v-text-field>
+            <v-text-field placeholder="entrer une description" label="description" v-model="description" :rules="inputRules" @keyup.enter="submit"></v-text-field>
 
             <v-menu>
 
@@ -33,7 +33,7 @@
             </v-menu>
 
             <v-btn class="success" @click="submit">
-              Save
+              Sauvegarder
             </v-btn>
 
           </v-form>
@@ -61,16 +61,12 @@ export default {
   methods: {
     submit () {
       if (this.$refs.Popup.validate()) {
-      // console.log(this.title, this.description, this.event_date)
       // à terme utiliser les données récupérées pour les stocker avec d'autres évènements puis les afficher sous la forme d'un calendrier
         this.$emit('newEvent1', {
           title: this.title,
           description: this.description,
           event_date: this.event_date
         })
-        //, this.description, this.event_date)
-        // this.$emit('newEvent2', this.description)
-        // this.$emit('newEvent3', this.event_date)
         this.title = ''
         this.description = ''
         this.event_date = ''

@@ -1,12 +1,10 @@
 const express = require('express')
 
-// creating an express instance
 const app = express()
 const cookieSession = require('cookie-session')
 const bodyParser = require('body-parser')
 const passport = require('passport')
 
-// getting the local authentication type
 const LocalStrategy = require('passport-local').Strategy
 
 app.use(bodyParser.json())
@@ -24,6 +22,9 @@ app.use(passport.session())
 const publicRoot = 'dist'
 
 app.use(express.static(publicRoot))
+
+// const path = require('path')
+// app.use(express.static(path.join(__dirname, 'dist/')))
 
 let users = [
   {
@@ -136,5 +137,5 @@ passport.deserializeUser((id, done) => {
 })
 
 app.listen(4000, () => {
-  console.log('Example app listening on port 4000')
+  console.log('Application lancée sur le port 4000')
 })

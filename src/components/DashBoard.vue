@@ -2,7 +2,7 @@
     <div align="center">
         <h2>Dashboard</h2>
         <br>
-        <p>Mail : {{ user.login }}</p>
+        <p>Email : {{ user.login }}</p>
         <br>
         <p>Nom : {{ user.name }}</p>
     </div>

@@ -9,7 +9,7 @@
       </v-toolbar-items>
 
       <template v-if="$vuetify.breakpoint.smAndUp">
-        <v-btn @click="calendar">Calendar</v-btn>
+        <v-btn @click="calendar">Calendrier</v-btn>
         &nbsp;
         <v-btn @click="dashboard">Dashboard</v-btn>
         &nbsp;
