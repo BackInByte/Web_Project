@@ -49,7 +49,8 @@ export default {
     return {
       name: '',
       description: '',
-      start: ''
+      start: '',
+      dialog: false
     }
   },
   methods: {
@@ -68,6 +69,7 @@ export default {
       this.title = ''
       this.description = ''
       this.event_date = ''
+      this.dialog = false
     }
   }
 }

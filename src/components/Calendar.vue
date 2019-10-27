@@ -368,6 +368,7 @@ export default {
       console.log('Index : ' + this.user_events.indexOf(this.selectedEvent))
       this.user_events.splice(index, 1)
       this.updateUserEventsTable(this.user_name)
+      this.selectedOpen = false
     },
     updateEvent2 (evt) {
       console.log('Calendar update reçu : ' + evt.name + evt.start)
@@ -389,6 +390,7 @@ export default {
       document.getElementById('popupupdate').style.display = 'none'
       document.getElementById('greet').style.display = 'block'
       this.updateUserEventsTable(this.user_name)
+      this.selectedOpen = false
     },
     saveEvent: function () {
       console.log('Greet')
@@ -402,6 +404,7 @@ export default {
       event.index = this.user_events.indexOf(this.selectedEvent)
       console.log('saveEvent index : ' + event.index)
       this.updateUserEventsTable(this.user_name)
+      this.selectedOpen = false
     }
   },
 
