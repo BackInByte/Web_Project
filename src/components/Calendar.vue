@@ -159,6 +159,7 @@ export default {
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
+    user_name: '',
     user_events: [{}],
     user1_events: [
       {
@@ -273,50 +274,47 @@ export default {
   methods: {
     select_event_table (parameter) {
       if (parameter === 'user@email.com') {
-        this.user_events = this.user2_events
-        // this.forceUpdate()
-        console.log(this.$refs.calendar.now)
-        console.log(this.$refs.calendar)
-        console.log(this.$refs.calendar.events)
-        console.log(this.$refs.calendar)
-        console.log(this.$refs.calendar.events)
-        // this.$refs.calendar.checkChange()
-        // this.updateRange()
+        this.user_events = this.user1_events
         console.log('parameter' + parameter)
-        console.log(this.$refs)
+        console.log('load user1_events in user_events')
+        console.log(this.user_events)
       }
       if (parameter === 'emma@email.com') {
-        this.user_events = this.user1_events
-        // .forceUpdate()
-        console.log(this.$refs.calendar.now)
-        console.log(this.$refs.calendar.events)
-        console.log(this.$refs.calendar)
-        // this.$refs.calendar.checkChange()
-        // this.updateRange()
+        this.user_events = this.user2_events
         console.log('parameter' + parameter)
-        console.log(this.$refs)
       }
       if (parameter === 'fnatic@email.com') {
         this.user_events = this.user3_events
-        // .forceUpdate()
-        console.log(this.$refs.calendar.now)
-        console.log(this.$refs.calendar.events)
-        console.log(this.$refs.calendar)
-        // this.$refs.calendar.checkChange()
-        // this.updateRange()
         console.log('parameter' + parameter)
-        console.log(this.$refs)
       }
       if (parameter === 'julien@email.com') {
         this.user_events = this.user4_events
-        // .forceUpdate()
-        console.log(this.$refs.calendar.now)
-        console.log(this.$refs.calendar.events)
-        console.log(this.$refs.calendar)
-        // this.$refs.calendar.checkChange()
-        // this.updateRange()
         console.log('parameter' + parameter)
-        console.log(this.$refs)
+      }
+    },
+    updateUserEventsTable (parameter) {
+      if (parameter === 'user@email.com') {
+        // this.user1_events = []
+        this.user1_events = this.user_events
+        localStorage.setItem('user1_events', JSON.stringify(this.user1_events))
+        console.log(this.user_events)
+        console.log(this.user1_events)
+        console.log('parameter' + parameter)
+      }
+      if (parameter === 'emma@email.com') {
+        this.user2_events = this.user_events
+        localStorage.setItem('user2_events', JSON.stringify(this.user2_events))
+        console.log('parameter' + parameter)
+      }
+      if (parameter === 'fnatic@email.com') {
+        this.user3_events = this.user_events
+        localStorage.setItem('user3_events', JSON.stringify(this.user3_events))
+        console.log('parameter' + parameter)
+      }
+      if (parameter === 'julien@email.com') {
+        this.user4_events = this.user_events
+        localStorage.setItem('user4_events', JSON.stringify(this.user4_events))
+        console.log('parameter' + parameter)
       }
     },
     SetCurrentDate () {
@@ -369,6 +367,7 @@ export default {
       var index = this.user_events.indexOf(this.selectedEvent)
       console.log('Index : ' + this.user_events.indexOf(this.selectedEvent))
       this.user_events.splice(index, 1)
+      this.updateUserEventsTable(this.user_name)
     },
     updateEvent2 (evt) {
       console.log('Calendar update reçu : ' + evt.name + evt.start)
@@ -389,6 +388,7 @@ export default {
       console.log('Event avec index après : ' + this.user_events[index].name, this.user_events[index].start)
       document.getElementById('popupupdate').style.display = 'none'
       document.getElementById('greet').style.display = 'block'
+      this.updateUserEventsTable(this.user_name)
     },
     saveEvent: function () {
       console.log('Greet')
@@ -401,13 +401,29 @@ export default {
       console.log('saveEvent sauvegardé : ' + event.name, event.start)
       event.index = this.user_events.indexOf(this.selectedEvent)
       console.log('saveEvent index : ' + event.index)
+      this.updateUserEventsTable(this.user_name)
     }
   },
 
   mounted () {
     this.$refs.calendar.checkChange()
-    console.log(this.user.login)
+    if (localStorage.getItem('user1_events')) {
+      this.user1_events = JSON.parse(localStorage.getItem('user1_events'))
+    }
+    if (localStorage.getItem('user2_events')) {
+      this.user2_events = JSON.parse(localStorage.getItem('user2_events'))
+    }
+    if (localStorage.getItem('user3_events')) {
+      this.user3_events = JSON.parse(localStorage.getItem('user3_events'))
+    }
+    if (localStorage.getItem('user4_events')) {
+      this.user4_events = JSON.parse(localStorage.getItem('user4_events'))
+    }
+    console.log(this.user.login + 'test')
+    console.log('Mounted de Calendar')
     this.$root.$on('Calendar', (parameter) => {
+      this.user_name = parameter
+      console.log('this.user_name =' + this.user_name)
       console.log('mounted de Calendar')
       this.select_event_table(parameter)
     })
@@ -423,8 +439,12 @@ export default {
           start: this.event.event_date,
           color: '#4285F4'
         })
+        this.updateUserEventsTable(this.user_name)
       }
     }
+    /* user1_events: function () {
+      this.updateUserEventsTable(this.user_name)
+    } */
   }
 }
 </script>
