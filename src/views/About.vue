@@ -1,5 +1,6 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>A propos</h1>
+    <p>Life Manager a été développé par deux étudiants ingénieurs de 4ème année</p>
   </div>
 </template>

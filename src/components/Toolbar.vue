@@ -13,9 +13,9 @@
         &nbsp;
         <v-btn @click="dashboard">Dashboard</v-btn>
         &nbsp;
-        <v-btn @click="logout">Logout</v-btn>
+        <v-btn @click="logout">Déconnexion</v-btn>
         &nbsp;
-        <v-btn @click="about">About</v-btn>
+        <v-btn @click="about">A propos</v-btn>
       </template>
     </v-toolbar>
   </div>

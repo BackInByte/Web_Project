@@ -18,14 +18,14 @@
         <v-card-text>
           <v-form ref="Popup">
 
-            Please fill the following fields :
-            <v-text-field placeholder="entrer un titre" label="Title" v-model="title" :rules="inputRules" @keyup.enter="submit"></v-text-field>
-            <v-text-field placeholder="entrer une description" label="description" v-model="description" :rules="inputRules" @keyup.enter="submit"></v-text-field>
+            Merci de remplir les champs suivants :
+            <v-text-field placeholder="Entrez un titre" label="Titre" v-model="title" :rules="inputRules" @keyup.enter="submit"></v-text-field>
+            <v-text-field placeholder="Entrez une description" label="Description" v-model="description" :rules="inputRules" @keyup.enter="submit"></v-text-field>
 
             <v-menu>
 
               <template v-slot:activator="{ on }">
-                <v-text-field :value="event_date" label="Event date" :rules="inputRules" v-on="on"></v-text-field>
+                <v-text-field :value="event_date" label="Cliquez ici pour choisir la date de l'événement" :rules="inputRules" v-on="on"></v-text-field>
               </template>
 
               <v-date-picker v-model="event_date" color="light blue"></v-date-picker>

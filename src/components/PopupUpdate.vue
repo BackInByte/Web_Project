@@ -13,18 +13,19 @@
 
       <v-card :close-on-content-click="true">
         <v-card-title>
-          Mettre à jour un event
+          Mettre à jour un événement
         </v-card-title>
 
         <v-card-text>
-          Compléter les cases suivantes :
-          <v-text-field placeholder="entrer un titre" label="Title" v-model="title" @keyup.enter="submit"></v-text-field>
-          <v-text-field placeholder="entrer une description" label="description" v-model="description" @keyup.enter="submit"></v-text-field>
+          Complétez les champs des propriétés que vous souhaitez modifier.
+          Seuls les champs complétés seront modifiés.
+          <v-text-field placeholder="Entrez un titre" label="Titre" v-model="title" @keyup.enter="submit"></v-text-field>
+          <v-text-field placeholder="Entrez une description" label="Description" v-model="description" @keyup.enter="submit"></v-text-field>
 
           <v-menu>
 
             <template v-slot:activator="{ on }">
-              <v-text-field :value="event_date" label="Event date" v-on="on"></v-text-field>
+              <v-text-field :value="event_date" label="Cliquez ici pour choisir la date de l'événement" v-on="on"></v-text-field>
             </template>
 
             <v-date-picker v-model="event_date" color="light blue"></v-date-picker>

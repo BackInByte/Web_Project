@@ -9,7 +9,7 @@
 
         <v-toolbar flat color="white">
           <v-btn outlined class="mr-4" @click="setToday">
-            Today
+            Recentrer sur aujourd'hui
           </v-btn>
           <v-btn fab text small @click="prev">
             <v-icon small>mdi-chevron-left</v-icon>
@@ -31,16 +31,16 @@
             </template>
             <v-list>
               <v-list-item @click="type = 'day'">
-                <v-list-item-title>Day</v-list-item-title>
+                <v-list-item-title>Jour</v-list-item-title>
               </v-list-item>
               <v-list-item @click="type = 'week'">
-                <v-list-item-title>Week</v-list-item-title>
+                <v-list-item-title>Semaine</v-list-item-title>
               </v-list-item>
               <v-list-item @click="type = 'month'">
-                <v-list-item-title>Month</v-list-item-title>
+                <v-list-item-title>Mois</v-list-item-title>
               </v-list-item>
               <v-list-item @click="type = '4day'">
-                <v-list-item-title>4 days</v-list-item-title>
+                <v-list-item-title>4 jours</v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>
@@ -70,7 +70,7 @@
           offset-x
           @loadstart="saveEvent"
           @change="saveEvent"
-          @click.native="greet"
+          
         >
           <v-card
             color="grey lighten-4"
@@ -83,19 +83,14 @@
             >
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <div class="flex-grow-1"></div>
-              <v-btn id="greet" icon @click="saveEvent" v-on="on">
-                <v-icon>mdi-dots-vertical</v-icon>
-              </v-btn>
-              <PopupUpdate id="popupupdate" style="display:none" @newEvent2="updateEvent2"/>
+              
+              <PopupUpdate id="popupupdate" @newEvent2="updateEvent2"/>
               <v-btn @click="deleteEvent" icon>
                 <v-icon>mdi-delete</v-icon>
               </v-btn>
-              <v-btn @click="saveEvent" icon>
-                <v-icon>mdi-heart</v-icon>
-              </v-btn>
             </v-toolbar>
             <v-card-text>
-              <span v-html="selectedEvent.details"></span>
+              <span v-html="selectedEvent.description"></span>
             </v-card-text>
             <v-card-actions>
               <v-btn
@@ -147,10 +142,10 @@ export default {
     focus: '2019-10-01',
     type: 'month',
     typeToLabel: {
-      month: 'Month',
-      week: 'Week',
-      day: 'Day',
-      '4day': '4 Days'
+      month: 'Mois',
+      week: 'Semaine',
+      day: 'Jour',
+      '4day': '4 jours'
     },
     start: null,
     end: null,
@@ -334,10 +329,12 @@ export default {
       this.$refs.calendar.next()
     },
     showEvent ({ nativeEvent, event }) {
+
       const open = () => {
         this.selectedEvent = event
         this.selectedElement = nativeEvent.target
         setTimeout(() => this.selectedOpen = true, 10)
+        this.saveEvent()
       }
 
       if (this.selectedOpen) {
@@ -383,14 +380,14 @@ export default {
         this.user_events[index].start = evt.start
       }
       console.log('Event avec index après : ' + this.user_events[index].name, this.user_events[index].start)
-      document.getElementById('popupupdate').style.display = 'none'
-      document.getElementById('greet').style.display = 'block'
+      // document.getElementById('popupupdate').style.display = 'none'
+      // document.getElementById('greet').style.display = 'block'
       this.updateUserEventsTable(this.user_name)
       this.selectedOpen = false
     },
     saveEvent: function () {
-      document.getElementById('popupupdate').style.display = 'block'
-      document.getElementById('greet').style.display = 'none'
+      // document.getElementById('popupupdate').style.display = 'block'
+      // document.getElementById('greet').style.display = 'none'
       event.name = this.selectedEvent.name
       event.description = this.selectedEvent.description
       event.start = this.selectedEvent.start
@@ -398,7 +395,7 @@ export default {
       event.index = this.user_events.indexOf(this.selectedEvent)
       console.log('saveEvent index : ' + event.index)
       this.updateUserEventsTable(this.user_name)
-      this.selectedOpen = false
+      // this.selectedOpen = false
     }
   },
 
@@ -429,13 +426,15 @@ export default {
 
   watch: {
     event: function () {
-      if (this.event.event_date && this.event.title) {
+      if (this.event.event_date && this.event.title && this.event.description) {
         console.log('Event ajouté')
         this.user_events.push({
           name: this.event.title,
           start: this.event.event_date,
+          // description: this.event.description
           color: '#4285F4'
         })
+        this.user_events[this.user_events.length - 1].description = this.event.description
         this.updateUserEventsTable(this.user_name)
       }
     }
