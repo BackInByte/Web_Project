@@ -54,7 +54,7 @@ let users = [
 ]
 
 app.get('/', (req, res, next) => {
-  res.sendFile('index.html', { root: publicRoot })
+  res.sendFile('index.html', { root: path.join(__dirname, 'dist/') })// publicRoot })
 })
 
 app.post('/api/login', (req, res, next) => {
