@@ -19,9 +19,9 @@ app.use(passport.initialize())
 
 app.use(passport.session())
 
-const publicRoot = 'dist'
+// const publicRoot = 'dist'
 
-app.use(express.static(publicRoot))
+// app.use(express.static(publicRoot))
 
 const path = require('path')
 app.use(express.static(path.join(__dirname, 'dist/')))
