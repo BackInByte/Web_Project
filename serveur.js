@@ -23,8 +23,8 @@ const publicRoot = 'dist'
 
 app.use(express.static(publicRoot))
 
-// const path = require('path')
-// app.use(express.static(path.join(__dirname, 'dist/')))
+const path = require('path')
+app.use(express.static(path.join(__dirname, 'dist/')))
 
 let users = [
   {

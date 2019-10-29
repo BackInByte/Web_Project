@@ -25,16 +25,19 @@
             <v-menu>
 
               <template v-slot:activator="{ on }">
-                <v-text-field :value="event_date" label="Cliquez ici pour choisir la date de l'événement" :rules="inputRules" v-on="on"></v-text-field>
+                <v-btn :value="event_date" label="Cliquez ici pour choisir la date de l'événement" :rules="inputRules" v-on="on">Cliquez ici pour choisir la date de l'événement</v-btn>
               </template>
 
               <v-date-picker v-model="event_date" color="light blue"></v-date-picker>
 
             </v-menu>
-
+            &nbsp;
+            <div style="height:25px;display:block;"> </div>
+            <div align="center">
             <v-btn class="success" @click="submit">
               Sauvegarder
             </v-btn>
+            </div>
 
           </v-form>
         </v-card-text>
