@@ -156,18 +156,6 @@ export default {
     user_events: [{}],
     user1_events: [
       {
-        name: 'Anniversaire Clémence',
-        start: '2019-11-15',
-        color: '#FD6C9E'
-      },
-      {
-        name: 'Shopping avec Irene',
-        start: '2019-11-14',
-        color: '#FD6C9E'
-      }
-    ],
-    user2_events: [
-      {
         name: 'Soirée',
         start: '2019-11-07',
         color: '#4285F4'
@@ -181,6 +169,18 @@ export default {
         name: 'Projet Web',
         start: '2019-10-30',
         color: '#4285F4'
+      }
+    ],
+    user2_events: [
+      {
+        name: 'Anniversaire Clémence',
+        start: '2019-11-15',
+        color: '#FD6C9E'
+      },
+      {
+        name: 'Shopping avec Irene',
+        start: '2019-11-14',
+        color: '#FD6C9E'
       }
     ],
     user3_events: [
@@ -261,13 +261,13 @@ export default {
   },
   methods: {
     select_event_table (parameter) {
-      if (parameter === 'emma@email.com') {
+      if (parameter === 'user@email.com') {
         this.user_events = this.user1_events
         console.log('parameter' + parameter)
         console.log('load user1_events in user_events')
         console.log(this.user_events)
       }
-      if (parameter === 'user@email.com') {
+      if (parameter === 'emma@email.com') {
         this.user_events = this.user2_events
         console.log('parameter' + parameter)
       }
