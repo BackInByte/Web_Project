@@ -70,7 +70,7 @@
           offset-x
           @loadstart="saveEvent"
           @change="saveEvent"
-          
+
         >
           <v-card
             color="grey lighten-4"
@@ -83,7 +83,7 @@
             >
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <div class="flex-grow-1"></div>
-              
+
               <PopupUpdate id="popupupdate" @newEvent2="updateEvent2"/>
               <v-btn @click="deleteEvent" icon>
                 <v-icon>mdi-delete</v-icon>
@@ -158,11 +158,6 @@ export default {
       {
         name: 'Anniversaire Clémence',
         start: '2019-11-15',
-        color: '#FD6C9E'
-      },
-      {
-        name: 'Concert BTS',
-        start: '2019-11-18 21:00',
         color: '#FD6C9E'
       },
       {
@@ -266,13 +261,13 @@ export default {
   },
   methods: {
     select_event_table (parameter) {
-      if (parameter === 'user@email.com') {
+      if (parameter === 'emma@email.com') {
         this.user_events = this.user1_events
         console.log('parameter' + parameter)
         console.log('load user1_events in user_events')
         console.log(this.user_events)
       }
-      if (parameter === 'emma@email.com') {
+      if (parameter === 'user@email.com') {
         this.user_events = this.user2_events
         console.log('parameter' + parameter)
       }
@@ -329,7 +324,6 @@ export default {
       this.$refs.calendar.next()
     },
     showEvent ({ nativeEvent, event }) {
-
       const open = () => {
         this.selectedEvent = event
         this.selectedElement = nativeEvent.target
